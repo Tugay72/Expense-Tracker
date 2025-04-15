@@ -9,10 +9,7 @@ export default function Homepage() {
         <div className="homepage-main">
             <ConfigProvider>
                 <div className='homepage-container'>
-                    <h1 style={{
-                        color: 'white',
-                        fontStyle: 'italic'
-                    }}>Kemal AKKANAT</h1>
+
 
                 </div>
             </ConfigProvider>
