@@ -22,7 +22,6 @@ const LoginPage = () => {
         });
     };
 
-
     const onFinish = (values) => {
         if (
             values.email === tempUser.email &&
@@ -34,29 +33,23 @@ const LoginPage = () => {
         }
     };
 
-
-
-
     return (
         <div className="login-main">
             {contextHolder}
             <ConfigProvider theme={Theme}>
                 <div className="login-container">
-                    <div className="login-left">
-                    </div>
+                    <div className="login-left"></div>
 
                     <div className="login-right">
                         <div className="login-form-container">
-                            <h2 style={{ textAlign: "center", marginBottom: "24px" }}>
-                                Login
-                            </h2>
+                            <h2 className="login-title">Welcome Back!</h2>
 
                             <Form
                                 name="login"
                                 initialValues={{ remember: true }}
                                 onFinish={onFinish}
                                 layout="vertical"
-                                style={{ width: "100%" }}
+                                className="login-form"
                             >
                                 <Form.Item
                                     name="email"
@@ -67,11 +60,7 @@ const LoginPage = () => {
                                         size="large"
                                         prefix={<UserOutlined />}
                                         placeholder="example@email.com"
-                                        style={{
-                                            borderRadius: "8px",
-                                            padding: "10px",
-                                            fontSize: "14px",
-                                        }}
+                                        className="login-input"
                                     />
                                 </Form.Item>
 
@@ -84,16 +73,12 @@ const LoginPage = () => {
                                         size="large"
                                         prefix={<LockOutlined />}
                                         placeholder="Your password"
-                                        style={{
-                                            borderRadius: "8px",
-                                            padding: "10px",
-                                            fontSize: "14px",
-                                        }}
+                                        className="login-input"
                                     />
                                 </Form.Item>
 
                                 <Form.Item>
-                                    <Checkbox style={{ fontSize: "14px" }}>Remember me</Checkbox>
+                                    <Checkbox className="remember-me">Remember me</Checkbox>
                                 </Form.Item>
 
                                 <Form.Item>
@@ -102,20 +87,39 @@ const LoginPage = () => {
                                         htmlType="submit"
                                         size="large"
                                         block
-                                        style={{
-                                            borderRadius: "8px",
-                                            padding: "12px 0",
-                                            fontSize: "16px",
-                                        }}
+                                        className="login-button"
                                     >
                                         Login
                                     </Button>
                                 </Form.Item>
                             </Form>
 
+                            <div className="divider">
+                                <div className="line" />
+                                <p className="divider-text">Or Login with</p>
+                                <div className="line" />
+                            </div>
 
-                            <p style={{ textAlign: "center", fontSize: "14px" }}>
-                                No account? <a><b>Register</b></a>
+                            <Button
+                                type="default"
+                                size="large"
+                                block
+                                icon={
+                                    <img src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
+                                        alt="Google"
+                                        className="google-icon"
+                                    />
+                                }
+                                className="google-button"
+                            >
+                                Continue with Google
+                            </Button>
+
+                            <p className="register-text">
+                                Don't have an account?
+                                <a href="/register" className="register-link">
+                                    Register here
+                                </a>
                             </p>
                         </div>
                     </div>

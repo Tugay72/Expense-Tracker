@@ -2,38 +2,53 @@ const Theme = {
     token: {
         fontFamily: 'Segoe UI, sans-serif',
 
-        // Primary color
-        colorPrimary: '#1E90FF', // Dodger Blue
+        // Primary color for buttons and highlights
+        colorPrimary: '#1E90FF',
 
         // Link color
         colorLink: '#187bcd',
 
-        // Font size for general text
+        // Base font size
         fontSizeBase: '16px',
 
-        // Text color
+        // Default text color
         colorTextBase: '#1A1A1A',
 
-        // Container background
-        colorBgContainer: '#FFFFFF',
+        // Container background color
+        colorBgContainer: '#f0f0f0',
 
-        // Input background
-        colorBgBase: '#F5F7FA',
+        // Input and base background
+        colorBgBase: '#ffffff',
 
-        // Error text color
+        // Layout background color
+        colorBgLayout: '#f0f0f0',
+
+        // Error color
         colorError: '#D32F2F',
 
-        // Warning text color
+        // Warning color
         colorWarning: '#F57C00',
 
-        // Background layout
-        colorBgLayout: '#EAF3FA',
+        // Success color
+        colorSuccess: '#2E7D32',
 
-        // Border radius
+        // Default border radius
         borderRadiusBase: '8px',
 
-        // Optional subtle shadow
-        boxShadowNeon: '0px 2px 8px rgba(0, 0, 0, 0.2)',
+        // Optional box shadow
+        boxShadowNeon: '0px 4px 12px rgba(0, 0, 0, 0.15)',
+
+        // Sidebar background color
+        colorMenuBg: '#00043b',
+
+        // Sidebar item hover background
+        colorMenuItemBgHover: '#3e43c5',
+
+        // Sidebar selected item text color
+        colorMenuItemSelected: '#1E90FF',
+
+        // Sidebar selected item background
+        colorMenuItemSelectedBg: '#ffffff',
     },
 };
 
