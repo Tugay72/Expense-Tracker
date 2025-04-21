@@ -1,0 +1,27 @@
+[
+    {
+      "email": "ali@example.com",
+      "type": "Gelir",
+      "description": "Maaş",
+      "amount": "5000"
+    },
+    {
+      "email": "ali@example.com",
+      "type": "Gider",
+      "description": "Yemek",
+      "amount": "800"
+    },
+    {
+      "email": "ali@example.com",
+      "type": "Gider",
+      "description": "Kira",
+      "amount": "1500"
+    },
+    {
+      "email": "ali@example.com",
+      "type": "Gelir",
+      "description": "Burs",
+      "amount": "2000"
+    }
+  ]
+  
