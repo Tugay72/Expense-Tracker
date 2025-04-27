@@ -5,56 +5,59 @@ import {
     FileTextOutlined,
     DollarOutlined,
     UserOutlined,
-    SettingOutlined
+    SettingOutlined,
+    HomeOutlined,
+    EuroCircleOutlined
 } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 import Theme from "../../Theme";
 import "./sidebar.css";
 
 const { Header, Sider, Content } = Layout;
 
-const menuItems = [
-    {
-        key: "1",
-        icon: <DashboardOutlined />,
-        label: "Dashboard",
-    },
-    {
-        key: "2",
-        icon: <FileTextOutlined />,
-        label: "Reports",
-    },
-    {
-        key: "3",
-        icon: <DollarOutlined />,
-        label: "Expenses",
-        children: [
-            {
-                key: "3-1",
-                label: "Add Expense",
-            },
-            {
-                key: "3-2",
-                label: "My Expenses",
-            },
-            {
-                key: "3-3",
-                label: "All Expenses",
-            },
-        ],
-    },
-    {
-        key: "4",
-        icon: <UserOutlined />,
-        label: "Profile",
-    },
-    {
-        key: "5",
-        icon: <SettingOutlined />,
-        label: "Settings",
-    },
-];
-
 const SidebarLayout = ({ children }) => {
+    const navigate = useNavigate();
+
+    const menuItems = [
+        {
+            key: "1",
+            icon: <HomeOutlined />,
+            label: "Home",
+            onClick: () => navigate("/homepage"),
+        },
+
+        {
+            key: "2",
+            icon: <DollarOutlined />,
+            label: "Expenses",
+            onClick: () => navigate("/expenses"),
+        },
+        {
+            key: "3",
+            icon: <EuroCircleOutlined />,
+            label: "Incomes",
+            onClick: () => navigate("/incomes"),
+        },
+        {
+            key: "4",
+            icon: <FileTextOutlined />,
+            label: "Reports",
+            onClick: () => navigate("/reports"),
+        },
+        {
+            key: "5",
+            icon: <UserOutlined />,
+            label: "Profile",
+            onClick: () => navigate("/profile"),
+        },
+        {
+            key: "6",
+            icon: <SettingOutlined />,
+            label: "Settings",
+            onClick: () => navigate("/settings"),
+        },
+    ];
+
     return (
         <ConfigProvider theme={Theme}>
             <Layout style={{ minHeight: "100vh" }}>
@@ -63,7 +66,6 @@ const SidebarLayout = ({ children }) => {
                     <Menu
                         theme="dark"
                         mode="inline"
-                        defaultSelectedKeys={["1"]}
                         items={menuItems}
                     />
                 </Sider>
