@@ -1,0 +1,78 @@
+.expenses-main {
+    min-height: 100vh;
+    background-color: #ffffff;
+}
+
+.expenses-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 24px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.add-expense-card,
+.total-spent-card,
+.expense-list-card,
+.filter-card {
+    margin-bottom: 24px;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.total-spent-card {
+    text-align: center;
+}
+
+.total-spent-card h1 {
+    font-size: 36px;
+    color: #ff4d4f;
+}
+
+.total-spent-card h2 {
+    font-size: 24px;
+    margin-bottom: 12px;
+    color: #333333;
+}
+
+.expense-list-card .ant-list-item {
+    padding: 16px 0;
+}
+
+.input-label {
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+.ant-card-head-title {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.ant-list-item-meta-title {
+    font-weight: 600;
+}
+
+.ant-list-item-meta-description {
+    color: #666666;
+}
+
+/* Buttons */
+.ant-btn-primary {
+    background-color: #1890ff;
+    border-color: #1890ff;
+}
+
+.ant-btn-dangerous {
+    background-color: #ff4d4f;
+    border-color: #ff4d4f;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .expenses-container {
+        padding: 12px;
+    }
+}
