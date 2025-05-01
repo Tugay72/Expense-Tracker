@@ -22,38 +22,38 @@ const SidebarLayout = ({ children }) => {
         {
             key: "1",
             icon: <HomeOutlined />,
-            label: "Home",
+            label: "Ana Sayfa",
             onClick: () => navigate("/homepage"),
         },
 
         {
             key: "2",
             icon: <DollarOutlined />,
-            label: "Expenses",
+            label: "Gider",
             onClick: () => navigate("/expenses"),
         },
         {
             key: "3",
             icon: <EuroCircleOutlined />,
-            label: "Incomes",
+            label: "Gelir",
             onClick: () => navigate("/incomes"),
         },
         {
             key: "4",
             icon: <FileTextOutlined />,
-            label: "Reports",
+            label: "Rapor",
             onClick: () => navigate("/reports"),
         },
         {
             key: "5",
             icon: <UserOutlined />,
-            label: "Profile",
+            label: "Profil",
             onClick: () => navigate("/profile"),
         },
         {
             key: "6",
             icon: <SettingOutlined />,
-            label: "Settings",
+            label: "Ayarlar",
             onClick: () => navigate("/settings"),
         },
     ];
@@ -62,7 +62,7 @@ const SidebarLayout = ({ children }) => {
         <ConfigProvider theme={Theme}>
             <Layout style={{ minHeight: "100vh" }}>
                 <Sider breakpoint="lg" collapsedWidth="0" className="sidebar">
-                    <div className="logo">Expenses</div>
+                    <div className="logo">Menu</div>
                     <Menu
                         theme="dark"
                         mode="inline"
@@ -70,11 +70,7 @@ const SidebarLayout = ({ children }) => {
                     />
                 </Sider>
                 <Layout>
-                    <Header className="header">
-                        <div className="header-right">
-                            <span className="username">User</span>
-                        </div>
-                    </Header>
+
                     <Content className="content">
                         {children}
                     </Content>

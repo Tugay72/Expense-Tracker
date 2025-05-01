@@ -68,43 +68,43 @@ const IncomePage = () => {
                 <div className="income-container">
 
                     {/* Add Income */}
-                    <Card title="Add New Income" bordered={false} className="add-income-card">
+                    <Card title="Yeni Gelir Ekle" bordered={false} className="add-income-card">
                         <Space direction="vertical" size="middle" style={{ width: "100%" }}>
-                            <div className="input-label">Income Source:</div>
+                            <div className="input-label">Gelir Kaynağı:</div>
                             <Input
                                 placeholder="Enter income source"
                                 value={incomeName}
                                 onChange={(e) => setIncomeName(e.target.value)}
                             />
-                            <div className="input-label">Amount:</div>
+                            <div className="input-label">Miktar($):</div>
                             <InputNumber
                                 placeholder="Enter amount"
                                 value={incomeAmount}
                                 onChange={(value) => setIncomeAmount(value)}
                                 style={{ width: "100%" }}
                             />
-                            <div className="input-label">Date:</div>
+                            <div className="input-label">Tarih:</div>
                             <DatePicker
                                 placeholder="Select date"
                                 value={incomeDate}
                                 onChange={(date) => setIncomeDate(date)}
                                 style={{ width: "100%" }}
                             />
-                            <div className="input-label">Category:</div>
+                            <div className="input-label">Kategori:</div>
                             <Select
                                 placeholder="Select category"
                                 value={incomeCategory}
                                 onChange={(value) => setIncomeCategory(value)}
                                 style={{ width: "100%" }}
                             >
-                                <Option value="Salary">Salary</Option>
+                                <Option value="Salary">Maaş</Option>
                                 <Option value="Freelance">Freelance</Option>
                                 <Option value="Business">Business</Option>
-                                <Option value="Investment">Investment</Option>
-                                <Option value="Other">Other</Option>
+                                <Option value="Investment">Yatırım</Option>
+                                <Option value="Other">Diğer</Option>
                             </Select>
                             <Button type="primary" onClick={handleAddIncome} block>
-                                Add Income
+                                Ekle
                             </Button>
                         </Space>
                     </Card>
@@ -115,7 +115,7 @@ const IncomePage = () => {
                     {/* Total Income */}
                     <Card className="total-income-card" bordered={false}>
                         <h2 style={{ marginBottom: 0 }}>
-                            Total Income ({filterType === "all" ? "All" : filterType === "today" ? "Today" : filterType === "week" ? "This Week" : "This Month"}):
+                            Toplam Gelir ({filterType === "all" ? "All" : filterType === "today" ? "Today" : filterType === "week" ? "This Week" : "This Month"}):
                         </h2>
                         <h1 style={{ color: "#1890ff" }}>${totalFilteredIncome.toFixed(2)}</h1>
                     </Card>
@@ -126,15 +126,15 @@ const IncomePage = () => {
                     {/* Filter Incomes */}
                     <Card bordered={false} className="filter-card">
                         <Radio.Group value={filterType} onChange={(e) => setFilterType(e.target.value)}>
-                            <Radio.Button value="all">All</Radio.Button>
-                            <Radio.Button value="today">Today</Radio.Button>
-                            <Radio.Button value="week">This Week</Radio.Button>
-                            <Radio.Button value="month">This Month</Radio.Button>
+                            <Radio.Button value="all">Tümü</Radio.Button>
+                            <Radio.Button value="today">Bugün</Radio.Button>
+                            <Radio.Button value="week">Bu Hafta</Radio.Button>
+                            <Radio.Button value="month">Bu Ay</Radio.Button>
                         </Radio.Group>
                     </Card>
 
                     {/* Income History */}
-                    <Card title="Income History" bordered={false} className="income-list-card">
+                    <Card title="Gelir Geçmişi" bordered={false} className="income-list-card">
                         <List
                             itemLayout="horizontal"
                             dataSource={filteredIncomes}
@@ -147,7 +147,7 @@ const IncomePage = () => {
                                             size="small"
                                             onClick={() => handleRemoveIncome(index)}
                                         >
-                                            Remove
+                                            Sil
                                         </Button>,
                                     ]}
                                 >

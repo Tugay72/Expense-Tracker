@@ -5,73 +5,86 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const CategoryCharts = ({ incomeCategories = {}, expenseCategories = {} }) => {
-  // Kategori renkleri
-  const categoryColors = {
-    Eğitim: "#36A2EB",
-    Kira: "#FF6384",
-    Fatura: "#FFCE56",
-    Yemek: "#4BC0C0",
-    Sağlık: "#9966FF",
-    Spor: "#FF9F40",
-    Eğlence: "#C9CBCF",
-    Alışveriş: "#FF6B6B",
-    Ulaşım: "#FFD166",
-    "Kredi Kartı": "#06D6A0",
-    Sigorta: "#DDA0DD",
-    Maaş: "#FF1493",
-    Burs: "#8A2BE2",
-    Kredi: "#228B22",
-    Diğer: "#808080",
-  };
 
-  // Gelir verileri
-  const incomeData = {
-    labels: Object.keys(incomeCategories),
-    datasets: [
-      {
-        data: Object.values(incomeCategories),
-        backgroundColor: Object.keys(incomeCategories).map(
-          (category) => categoryColors[category] || "#cccccc"
-        ),
-        hoverBackgroundColor: Object.keys(incomeCategories).map(
-          (category) => categoryColors[category] || "#cccccc"
-        ),
-      },
-    ],
-  };
+    const categoryColors = {
 
-  // Gider verileri
-  const expenseData = {
-    labels: Object.keys(expenseCategories),
-    datasets: [
-      {
-        data: Object.values(expenseCategories),
-        backgroundColor: Object.keys(expenseCategories).map(
-          (category) => categoryColors[category] || "#cccccc"
-        ),
-        hoverBackgroundColor: Object.keys(expenseCategories).map(
-          (category) => categoryColors[category] || "#cccccc"
-        ),
-      },
-    ],
-  };
+        // Gelir kategorileri
+        Maaş: "#4CAF50",  // Yeşil
+        Burs: "#2196F3",  // Mavi
+        Freelance: "#FF9800",  // Turuncu
+        Yatırım: "#9C27B0",  // Mor
+        İşletme: "#3F51B5",  // Mavi
 
-  return (
-    <div style={{ display: "flex", gap: "100px" }}>
-      <div>
-        <h2>Gelir Kategorileri</h2>
-        <div style={{ width: "220x", height: "220px" }}>
-          <Pie data={incomeData} />
+        // Gider kategorileri
+        Kira: "#FF5722",    // Mercan
+        Fatura: "#FFEB3B",  // Sarı
+        Yemek: "#FF9800",   // Turuncu
+        Sağlık: "#9C27B0",  // Mor
+        Spor: "#FF6F00",    // Turuncu-kahverengi
+        Eğlence: "#E91E63", // Pembe
+        Alışveriş: "#FF4081", // Pembe
+        Ulaşım: "#FFC107",  // Altın Sarısı
+        "Kredi Kartı": "#D32F2F", // Kırmızı
+        Sigorta: "#673AB7", // Mor
+        Diğer: "#607D8B",   // Gri
+        Kredi: "#F44336",   // Kırmızı
+    };
+
+
+    // Gelir verileri
+    const incomeData = {
+        labels: Object.keys(incomeCategories),
+        datasets: [
+            {
+                data: Object.values(incomeCategories),
+                backgroundColor: Object.keys(incomeCategories).map(
+                    (category) => categoryColors[category] || "#cccccc"
+                ),
+                hoverBackgroundColor: Object.keys(incomeCategories).map(
+                    (category) => categoryColors[category] || "#cccccc"
+                ),
+            },
+        ],
+    };
+
+    // Gider verileri
+    const expenseData = {
+        labels: Object.keys(expenseCategories),
+        datasets: [
+            {
+                data: Object.values(expenseCategories),
+                backgroundColor: Object.keys(expenseCategories).map(
+                    (category) => categoryColors[category] || "#cccccc"
+                ),
+                hoverBackgroundColor: Object.keys(expenseCategories).map(
+                    (category) => categoryColors[category] || "#cccccc"
+                ),
+            },
+        ],
+    };
+
+    return (
+        <div style={{ display: "flex", gap: "48px" }}>
+            {Object.keys(incomeCategories).length > 0 && (
+                <div>
+                    <h2>Gelir Kategorileri</h2>
+                    <div style={{ width: "300px", height: "300px" }}>
+                        <Pie data={incomeData} />
+                    </div>
+                </div>
+            )}
+            {Object.keys(expenseCategories).length > 0 && (
+                <div>
+                    <h2>Gider Kategorileri</h2>
+                    <div style={{ width: "300px", height: "300px" }}>
+                        <Pie data={expenseData} />
+                    </div>
+                </div>
+            )}
         </div>
-      </div>
-      <div>
-        <h2>Gider Kategorileri</h2>
-        <div style={{ width: "220px", height: "220px" }}>
-          <Pie data={expenseData} />
-        </div>
-      </div>
-    </div>
-  );
+
+
+    );
 };
 
 export default CategoryCharts;

@@ -1,0 +1,49 @@
+.report-page {
+    min-height: 100vh;
+    background-color: #f8f9fa;
+}
+
+.report-header {
+    text-align: center;
+}
+
+.report-header h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+}
+
+.filter-container {
+    max-width: 600px;
+    margin: 0 auto 32px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+}
+
+.card-content-center {
+    text-align: center;
+    padding: 24px;
+}
+
+.table-section {
+    max-width: 960px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.table-section h2 {
+    font-size: 20px;
+    margin-bottom: 16px;
+    color: #222;
+}

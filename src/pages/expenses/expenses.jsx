@@ -68,43 +68,45 @@ const ExpensesPage = () => {
                 <div className="expenses-container">
 
                     {/* Add Expense */}
-                    <Card title="Add New Expense" bordered={false} className="add-expense-card">
+                    <Card title="Yeni Gider Ekle" bordered={false} className="add-expense-card">
                         <Space direction="vertical" size="middle" style={{ width: "100%" }}>
-                            <div className="input-label">Expense Name:</div>
+                            <div className="input-label">Gider İsmi:</div>
                             <Input
                                 placeholder="Enter expense name"
                                 value={expenseName}
                                 onChange={(e) => setExpenseName(e.target.value)}
                             />
-                            <div className="input-label">Cost:</div>
+                            <div className="input-label">Maliyet($):</div>
                             <InputNumber
                                 placeholder="Enter cost"
                                 value={expenseCost}
                                 onChange={(value) => setExpenseCost(value)}
                                 style={{ width: "100%" }}
                             />
-                            <div className="input-label">Date:</div>
+                            <div className="input-label">Tarih:</div>
                             <DatePicker
                                 placeholder="Select date"
                                 value={expenseDate}
                                 onChange={(date) => setExpenseDate(date)}
                                 style={{ width: "100%" }}
                             />
-                            <div className="input-label">Category:</div>
+                            <div className="input-label">Kategori:</div>
                             <Select
                                 placeholder="Select category"
                                 value={expenseCategory}
                                 onChange={(value) => setExpenseCategory(value)}
                                 style={{ width: "100%" }}
                             >
-                                <Option value="Food">Food</Option>
-                                <Option value="Transport">Transport</Option>
-                                <Option value="Shopping">Shopping</Option>
-                                <Option value="Entertainment">Entertainment</Option>
-                                <Option value="Other">Other</Option>
+                                <Option value="Food">Kira</Option>
+                                <Option value="Food">Fatura</Option>
+                                <Option value="Food">Yemek</Option>
+                                <Option value="Transport">Ulaşım</Option>
+                                <Option value="Shopping">Alışveriş</Option>
+                                <Option value="Entertainment">Eğlence</Option>
+                                <Option value="Other">Diğer</Option>
                             </Select>
                             <Button type="primary" onClick={handleAddExpense} block>
-                                Add Expense
+                                Ekle
                             </Button>
                         </Space>
                     </Card>
@@ -115,7 +117,7 @@ const ExpensesPage = () => {
                     {/* Total Spent */}
                     <Card className="total-spent-card" bordered={false}>
                         <h2 style={{ marginBottom: 0 }}>
-                            Total Spent ({filterType === "all" ? "All" : filterType === "today" ? "Today" : filterType === "week" ? "This Week" : "This Month"}):
+                            Toplam Harcanan ({filterType === "all" ? "All" : filterType === "today" ? "Today" : filterType === "week" ? "This Week" : "This Month"}):
                         </h2>
                         <h1 style={{ color: "#52c41a" }}>${totalFilteredCost.toFixed(2)}</h1>
                     </Card>
@@ -126,15 +128,15 @@ const ExpensesPage = () => {
                     {/* Filter Expenses */}
                     <Card bordered={false} className="filter-card">
                         <Radio.Group value={filterType} onChange={(e) => setFilterType(e.target.value)}>
-                            <Radio.Button value="all">All</Radio.Button>
-                            <Radio.Button value="today">Today</Radio.Button>
-                            <Radio.Button value="week">This Week</Radio.Button>
-                            <Radio.Button value="month">This Month</Radio.Button>
+                            <Radio.Button value="all">Tümü</Radio.Button>
+                            <Radio.Button value="today">Bugün</Radio.Button>
+                            <Radio.Button value="week">Bu Hafta</Radio.Button>
+                            <Radio.Button value="month">Bu Ay</Radio.Button>
                         </Radio.Group>
                     </Card>
 
                     {/* Expense History */}
-                    <Card title="Expense History" bordered={false} className="expense-list-card">
+                    <Card title="Gider Geçmişi" bordered={false} className="expense-list-card">
                         <List
                             itemLayout="horizontal"
                             dataSource={filteredExpenses}
@@ -147,7 +149,7 @@ const ExpensesPage = () => {
                                             size="small"
                                             onClick={() => handleRemoveExpense(index)}
                                         >
-                                            Remove
+                                            Sil
                                         </Button>,
                                     ]}
                                 >
