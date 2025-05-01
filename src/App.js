@@ -2,7 +2,7 @@ import "./App.css";
 import { lazy } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-const Homepage = lazy(() => import("./pages/homepage/HomePage"));
+const Homepage = lazy(() => import("./pages/homepage/homepage.jsx"));
 const LoginPage = lazy(() => import("./pages/login/login"));
 const Expenses = lazy(() => import("./pages/expenses/expenses"));
 const Incomes = lazy(() => import("./pages/incomes/incomes"));

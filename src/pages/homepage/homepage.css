@@ -1,9 +1,43 @@
-
-.homepage-main{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+/* homepage.css */
+.homepage-main {
+    background-color: #f0f2f5;
     min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+.homepage-container {
+    width: 100%;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.ant-card {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
+}
+
+.ant-card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 16px;
+}
+
+.ant-card-body {
+    padding: 16px;
+}
+
+.ant-card h2 {
+    font-size: 24px;
+    margin: 0;
+}

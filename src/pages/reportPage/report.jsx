@@ -6,7 +6,8 @@ import {
     Card,
     Statistic,
     Divider,
-    DatePicker
+    DatePicker,
+    List
 } from "antd";
 import SidebarLayout from "../../components/sidebar/siderbar";
 import expensesData from "../../data/expensesData";
@@ -46,6 +47,10 @@ const ReportPage = () => {
         return acc;
     }, {});
 
+    // Get the last 5 income and expense records
+    const recentIncomes = filteredIncomes.slice(-5).reverse();
+    const recentExpenses = filteredExpenses.slice(-5).reverse();
+
     return (
         <div className="report-page">
             <ConfigProvider theme={Theme}>
@@ -80,6 +85,22 @@ const ReportPage = () => {
                         <Divider />
 
                         <Row gutter={24}>
+
+                            <Col span={12}>
+                                <Card title="Kategoriye Göre Gelirler" style={{ marginBottom: 24 }}>
+                                    <Row gutter={16}>
+                                        <Col span={12}>
+                                            {Object.entries(topIncomeCategory).map(([category, amount]) => (
+                                                <Statistic key={category} title={category} value={amount} precision={2} prefix="$" />
+                                            ))}
+                                        </Col>
+                                        <Col span={12}>
+                                            <CategoryCharts incomeCategories={topIncomeCategory} />
+                                        </Col>
+                                    </Row>
+                                </Card>
+                            </Col>
+
                             <Col span={12}>
                                 <Card title="Kategoriye Göre Giderler" style={{ marginBottom: 24 }}>
                                     <Row gutter={16}>
@@ -94,19 +115,41 @@ const ReportPage = () => {
                                     </Row>
                                 </Card>
                             </Col>
+                        </Row>
 
+                        <Divider />
+
+                        <Row gutter={[16, 16]}>
                             <Col span={12}>
-                                <Card title="Kategoriye Göre Gelirler" style={{ marginBottom: 24 }}>
-                                    <Row gutter={16}>
-                                        <Col span={12}>
-                                            {Object.entries(topIncomeCategory).map(([category, amount]) => (
-                                                <Statistic key={category} title={category} value={amount} precision={2} prefix="$" />
-                                            ))}
-                                        </Col>
-                                        <Col span={12}>
-                                            <CategoryCharts incomeCategories={topIncomeCategory} />
-                                        </Col>
-                                    </Row>
+                                <Card title="Son Gelirler" bordered={false}>
+                                    <List
+                                        dataSource={recentIncomes}
+                                        renderItem={(item) => (
+                                            <List.Item>
+                                                <List.Item.Meta
+                                                    title={item.name}
+                                                    description={`Tarih: ${item.date} | Kategori: ${item.category}`}
+                                                />
+                                                <div style={{ color: "#1890ff" }}>+${item.amount}</div>
+                                            </List.Item>
+                                        )}
+                                    />
+                                </Card>
+                            </Col>
+                            <Col span={12}>
+                                <Card title="Son Giderler" bordered={false}>
+                                    <List
+                                        dataSource={recentExpenses}
+                                        renderItem={(item) => (
+                                            <List.Item>
+                                                <List.Item.Meta
+                                                    title={item.name}
+                                                    description={`Tarih: ${item.date} | Kategori: ${item.category}`}
+                                                />
+                                                <div style={{ color: "#ff4d4f" }}>-${item.cost}</div>
+                                            </List.Item>
+                                        )}
+                                    />
                                 </Card>
                             </Col>
                         </Row>
