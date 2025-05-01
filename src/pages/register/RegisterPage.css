@@ -1,4 +1,4 @@
-.login-main {
+.register-main {
     height: 100vh;
     display: flex;
     align-items: center;
@@ -6,7 +6,7 @@
     background: linear-gradient(270deg, #00043b, #3e43c5,#f0f0f0, #f0f0f0);
 }
 
-.login-container {
+.register-container {
     display: flex;
     width: 1200px;
     height: 680px;
@@ -15,7 +15,7 @@
     overflow: hidden;
 }
 
-.login-left {
+.register-left {
     flex: 1;
     display: flex;
     align-items: center;
@@ -26,14 +26,13 @@
     padding: 24px;
 }
 
-
-.login-left img {
+.register-left img {
     width: 100%;
     max-width: 300px;
     height: auto;
 }
 
-.login-right {
+.register-right {
     flex: 1;
     background-color: #ffffff;
     border: none;
@@ -43,21 +42,21 @@
     padding: 32px;
 }
 
-.login-form-container {
+.register-form-container {
     width: 100%;
     max-width: 300px;
 }
 
-.login-title {
+.register-title {
     text-align: center;
     margin-bottom: 24px;
 }
 
-.login-form {
+.register-form {
     width: 100%;
 }
 
-.login-input {
+.register-input {
     border-radius: 8px;
     padding: 10px;
     font-size: 14px;
@@ -67,7 +66,7 @@
     font-size: 14px;
 }
 
-.login-button {
+.register-button {
     border-radius: 8px;
     padding: 12px 0;
     font-size: 16px;
@@ -89,22 +88,6 @@
     margin: 0 16px;
     font-size: 14px;
     white-space: nowrap;
-}
-
-.google-icon {
-    width: 32px;
-    padding-top: 4px;
-}
-
-.google-button {
-    margin-top: 12px;
-    border-radius: 8px;
-    padding: 12px 0;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
 }
 
 .register-text {

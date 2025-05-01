@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { Form, Input, Button, Checkbox, ConfigProvider, message } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import Theme from "../../Theme";
+import { Link } from "react-router-dom";
+
 
 const tempUser = {
     email: 'admin@abc.com',
@@ -42,7 +44,7 @@ const LoginPage = () => {
 
                     <div className="login-right">
                         <div className="login-form-container">
-                            <h2 className="login-title">Welcome Back!</h2>
+                            <h2 className="login-title">Welcome!</h2>
 
                             <Form
                                 name="login"
@@ -94,33 +96,14 @@ const LoginPage = () => {
                                 </Form.Item>
                             </Form>
 
-                            <div className="divider">
-                                <div className="line" />
-                                <p className="divider-text">Or Login with</p>
-                                <div className="line" />
-                            </div>
-
-                            <Button
-                                type="default"
-                                size="large"
-                                block
-                                icon={
-                                    <img src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
-                                        alt="Google"
-                                        className="google-icon"
-                                    />
-                                }
-                                className="google-button"
-                            >
-                                Continue with Google
-                            </Button>
+                           
 
                             <p className="register-text">
-                                Don't have an account?
-                                <a href="/register" className="register-link">
-                                    Register here
-                                </a>
-                            </p>
+                            Don't have an account?{" "}
+                        <Link to="/register" className="register-link">
+                            Register here
+                        </Link>
+                        </p>
                         </div>
                     </div>
                 </div>

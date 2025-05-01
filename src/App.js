@@ -1,6 +1,7 @@
 import "./App.css";
 import { lazy } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import RegisterPage from "./pages/register/RegisterPage";
 
 const Homepage = lazy(() => import("./pages/homepage/HomePage"));
 const LoginPage = lazy(() => import("./pages/login/login"));
@@ -12,8 +13,9 @@ function App() {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Homepage />} />
-                <Route path="/login" element={<LoginPage />} />
+                <Route path="/" element={<LoginPage/>} />
+                <Route path="/login" element={< LoginPage/>} />
+                <Route path="/register" element={<RegisterPage/>} />
                 <Route path="/homepage" element={<Homepage />} />
                 <Route path="/expenses" element={<Expenses />} />
                 <Route path="/incomes" element={<Incomes />} />
