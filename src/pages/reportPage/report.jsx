@@ -10,10 +10,8 @@ import {
     List
 } from "antd";
 import SidebarLayout from "../../components/sidebar/siderbar";
-import expensesData from "../../data/expensesData";
-import incomeData from "../../data/incomeData";
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CategoryCharts from "../../components/CategoryCharts";
 import Theme from "../../Theme";
 
@@ -21,6 +19,8 @@ const { RangePicker } = DatePicker;
 
 const ReportPage = () => {
     const [filterRange, setFilterRange] = useState([null, null]);
+    const [expenses, setExpenses] = useState([]);
+    const [incomes, setIncomes] = useState([]);
 
     const filterByDate = (data) => {
         if (!filterRange[0] || !filterRange[1]) return data;
@@ -30,8 +30,8 @@ const ReportPage = () => {
         });
     };
 
-    const filteredExpenses = filterByDate(expensesData);
-    const filteredIncomes = filterByDate(incomeData);
+    const filteredExpenses = filterByDate(expenses);
+    const filteredIncomes = filterByDate(incomes);
 
     const totalExpense = filteredExpenses.reduce((acc, e) => acc + e.cost, 0);
     const totalIncome = filteredIncomes.reduce((acc, i) => acc + i.amount, 0);
@@ -47,9 +47,57 @@ const ReportPage = () => {
         return acc;
     }, {});
 
-    // Get the last 5 income and expense records
     const recentIncomes = filteredIncomes.slice(-5).reverse();
     const recentExpenses = filteredExpenses.slice(-5).reverse();
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            console.warn("Token yok!");
+            return;
+        }
+
+        fetch("http://localhost:3000/api/expenses/list", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                const formatted = data.expenses.map(item => ({
+                    id: item.expense_id,
+                    name: item.expense_name,
+                    cost: parseFloat(item.expense_amount),
+                    category: item.expense_category,
+                    date: dayjs(item.expense_date).format("YYYY-MM-DD"),
+                }));
+                setExpenses(formatted);
+            })
+            .catch(console.error);
+
+        fetch("http://localhost:3000/api/income/list", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                const formatted = data.incomes.map(item => ({
+                    id: item.income_id,
+                    name: item.income_name || item.income_source,
+                    amount: parseFloat(item.income_amount),
+                    category: item.income_category,
+                    date: dayjs(item.income_date).format("YYYY-MM-DD"),
+                }));
+                setIncomes(formatted);
+            })
+            .catch(console.error);
+    }, []);
 
     return (
         <div className="report-page">
@@ -85,7 +133,6 @@ const ReportPage = () => {
                         <Divider />
 
                         <Row gutter={24}>
-
                             <Col span={12}>
                                 <Card title="Kategoriye Göre Gelirler" style={{ marginBottom: 24 }}>
                                     <Row gutter={16}>

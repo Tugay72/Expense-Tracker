@@ -1,5 +1,4 @@
-// src/pages/register/RegisterPage.jsx
-import "./RegisterPage.css"; // CSS dosyasını import ediyoruz
+import "./RegisterPage.css";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Input, Button, Checkbox, ConfigProvider, message } from "antd";
@@ -7,34 +6,40 @@ import { LockOutlined, UserOutlined, MailOutlined } from "@ant-design/icons";
 import Theme from "../../Theme";
 
 
-const tempUser = {
-    email: 'admin@abc.com',
-    username: 'admin',
-    password: 'password'
-}
-
 const RegisterPage = () => {
     const navigate = useNavigate();
     const [messageApi, contextHolder] = message.useMessage();
 
-    const error = () => {
-        messageApi.open({
-            type: 'error',
-            content: 'Invalid email or password',
-        });
-    };
+    const onFinish = async (values) => {
+        try {
+            const res = await fetch("http://localhost:3000/api/auth/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    first_name: values.first_name,
+                    last_name: values.last_name,
+                    email: values.email,
+                    password: values.password
+                })
+            });
 
-    const onFinish = (values) => {
-        if (
-            values.email === tempUser.email &&
-            values.password === tempUser.password &&
-            values.username === tempUser.username
-        ) {
-            navigate("/homepage");
-        } else {
-            error();
+            const data = await res.json();
+
+            if (res.ok) {
+                localStorage.setItem("token", data.token);
+                navigate("/login");
+            } else {
+                messageApi.error(data.message || "Registration failed");
+            }
+        } catch (err) {
+            console.error("Register error:", err);
+            messageApi.error("An error occurred during registration");
         }
     };
+
+
 
     return (
         <div className="register-main">
@@ -66,15 +71,29 @@ const RegisterPage = () => {
                                 </Form.Item>
 
                                 <Form.Item
-                                    name="username"
-                                    rules={[{ required: true, message: "Please enter your username!" }]}>
+                                    name="first_name"
+                                    rules={[{ required: true, message: "Please enter your first name!" }]}
+                                >
                                     <Input
                                         size="large"
                                         prefix={<UserOutlined />}
-                                        placeholder="Your username"
+                                        placeholder="First Name"
                                         className="register-input"
                                     />
                                 </Form.Item>
+
+                                <Form.Item
+                                    name="last_name"
+                                    rules={[{ required: true, message: "Please enter your last name!" }]}
+                                >
+                                    <Input
+                                        size="large"
+                                        prefix={<UserOutlined />}
+                                        placeholder="Last Name"
+                                        className="register-input"
+                                    />
+                                </Form.Item>
+
 
                                 <Form.Item
                                     name="password"

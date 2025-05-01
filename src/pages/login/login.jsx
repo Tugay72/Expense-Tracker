@@ -1,5 +1,5 @@
 import "./login.css";
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Form, Input, Button, Checkbox, ConfigProvider, message } from "antd";
@@ -7,11 +7,6 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import Theme from "../../Theme";
 import { Link } from "react-router-dom";
 
-
-const tempUser = {
-    email: 'admin@abc.com',
-    password: 'password'
-}
 
 const LoginPage = () => {
     const navigate = useNavigate();
@@ -24,16 +19,36 @@ const LoginPage = () => {
         });
     };
 
-    const onFinish = (values) => {
-        if (
-            values.email === tempUser.email &&
-            values.password === tempUser.password
-        ) {
-            navigate("/homepage");
-        } else {
-            error()
+    const onFinish = async (values) => {
+        try {
+            const res = await fetch("http://localhost:3000/api/auth/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: values.email,
+                    password: values.password
+                })
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                // JWT token'ı localStorage'a kaydet
+                localStorage.setItem("token", data.token);
+
+                // Giriş başarılı → anasayfaya yönlendir
+                navigate("/homepage");
+            } else {
+                error(); // Hatalı giriş
+            }
+        } catch (err) {
+            console.error("Login error:", err);
+            error();
         }
     };
+
 
     return (
         <div className="login-main">
@@ -96,14 +111,14 @@ const LoginPage = () => {
                                 </Form.Item>
                             </Form>
 
-                           
+
 
                             <p className="register-text">
-                            Don't have an account?{" "}
-                        <Link to="/register" className="register-link">
-                            Register here
-                        </Link>
-                        </p>
+                                Don't have an account?{" "}
+                                <Link to="/register" className="register-link">
+                                    Register here
+                                </Link>
+                            </p>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,6 @@
 import React from "react";
 import { Layout, Menu, ConfigProvider } from "antd";
 import {
-    DashboardOutlined,
     FileTextOutlined,
     DollarOutlined,
     UserOutlined,
@@ -13,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import Theme from "../../Theme";
 import "./sidebar.css";
 
-const { Header, Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 
 const SidebarLayout = ({ children }) => {
     const navigate = useNavigate();
