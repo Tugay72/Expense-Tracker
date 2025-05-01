@@ -1,101 +1,83 @@
 import React, { useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import transactions from "../data/transactions.json"; // JSON dosyasını import et
+import incomeData from "../data/incomeData";
+import expensesData from "../data/expensesData";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const BalanceChart = () => {
-  const [totalIncome, setTotalIncome] = useState(0);
-  const [totalExpense, setTotalExpense] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
+    const [totalIncome, setTotalIncome] = useState(0);
+    const [totalExpense, setTotalExpense] = useState(0);
+    const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    let income = 0;
-    let expense = 0;
+    useEffect(() => {
+        const income = incomeData.reduce((sum, item) => sum + parseFloat(item.amount || 0), 0);
+        const expense = expensesData.reduce((sum, item) => sum + parseFloat(item.cost || 0), 0);
 
-    transactions.forEach((item) => {
-      const amount = parseFloat(item.amount);
-      if (isNaN(amount)) return; // Geçerli değilse atla
+        setTotalIncome(income);
+        setTotalExpense(expense);
+        setIsLoading(false);
+    }, []);
 
-      if (item.type === "Gelir") {
-        income += amount;
-      } else if (item.type === "Gider") {
-        expense += amount;
-      }
-    });
+    const balance = totalIncome - totalExpense;
+    const balanceText = `${balance >= 0 ? "+" : ""}${balance.toFixed(2)}`;
+    const balanceColor = balance >= 0 ? "#52c41a" : "#ff4d4f";
 
-    setTotalIncome(income);
-    setTotalExpense(expense);
-    setIsLoading(false);
-  }, []); // Email bağımlılığı kaldırıldı, sadece ilk renderda çalışacak
+    const data = {
+        labels: ["Gelir", "Gider"],
+        datasets: [
+            {
+                data: [totalIncome, totalExpense],
+                backgroundColor: ["#36A2EB", "#FF6384"],
+                hoverBackgroundColor: ["#36A2EB", "#FF6384"],
+            },
+        ],
+    };
 
-  const balance = totalIncome - totalExpense;
-  const balanceColor = balance >= 0 ? "green" : "red";
-  const balanceText =
-    balance >= 0 ? `+${balance.toFixed(2)}` : balance.toFixed(2);
+    const options = {
+        maintainAspectRatio: false,
+        cutout: "70%",
+        plugins: {
+            legend: {
+                position: "bottom",
+            },
+        },
+    };
 
-  const data = {
-    labels: ["Gelir", "Gider"],
-    datasets: [
-      {
-        data: [totalIncome, totalExpense],
-        backgroundColor: ["#36A2EB", "#FF6384"],
-        hoverBackgroundColor: ["#36A2EB", "#FF6384"],
-      },
-    ],
-  };
+    const centerTextPlugin = {
+        id: "centerText",
+        beforeDraw: function (chart) {
+            const { width, height, ctx } = chart;
+            ctx.save();
+            const fontSize = (height / 114).toFixed(2);
+            ctx.font = `${fontSize}em sans-serif`;
+            ctx.textBaseline = "middle";
+            ctx.fillStyle = balanceColor;
 
-  const options = {
-    maintainAspectRatio: false,
-    hover: {
-      mode: null,
-    },
-  };
+            const textX = Math.round((width - ctx.measureText(balanceText).width) / 2);
+            const textY = height / 2;
+            ctx.fillText(balanceText, textX, textY);
+            ctx.restore();
+        },
+    };
 
-  const centerTextPlugin = {
-    id: "centerText",
-    beforeDraw: function (chart) {
-      const width = chart.width;
-      const height = chart.height;
-      const ctx = chart.ctx;
-
-      ctx.clearRect(0, 0, width, height);
-
-      let fontSize = Math.min(
-        height / 114,
-        width / ctx.measureText(balanceText).width
-      );
-      fontSize = fontSize > 1 ? fontSize : 1;
-      ctx.font = `${fontSize}em sans-serif`;
-
-      const textWidth = ctx.measureText(balanceText).width;
-      ctx.textBaseline = "middle";
-
-      const textX = Math.round((width - textWidth) / 2);
-      const textY = height / 2;
-
-      ctx.fillStyle = balanceColor;
-      ctx.fillText(balanceText, textX, textY);
-    },
-  };
-
-  return (
-    <div>
-      <h2>Güncel Bakiye</h2>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <div style={{ width: "275px", height: "275px" }}>
-          <Doughnut
-            data={data}
-            options={options}
-            plugins={[centerTextPlugin]}
-          />
+    return (
+        <div style={{ textAlign: "center" }}>
+            <h2>Güncel Bakiye</h2>
+            {isLoading ? (
+                <p>Yükleniyor...</p>
+            ) : (
+                <div style={{ width: "320px", height: "320px", margin: "0 auto" }}>
+                    <Doughnut
+                        data={data}
+                        options={options}
+                        plugins={[centerTextPlugin]}
+                    />
+                </div>
+            )}
         </div>
-      )}
-    </div>
-  );
+    );
 };
 
 export default BalanceChart;

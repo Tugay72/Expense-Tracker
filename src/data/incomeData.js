@@ -34,6 +34,7 @@ const incomeData = [
     { name: "Borsa Geliri", amount: 300.00, date: "2024-11-10", category: "Yatırım" },
     { name: "Dropshipping Satışı", amount: 700.00, date: "2024-11-07", category: "İşletme" },
     { name: "Eski Eşya Satışı", amount: 90.00, date: "2024-11-03", category: "Diğer" },
+    { name: "Bayram Harçlığı", amount: 240.00, date: "2024-04-02", category: "Diğer" },
 ];
 
 export default incomeData;
