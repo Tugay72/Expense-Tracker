@@ -24,7 +24,7 @@ const { Option } = Select;
 const IncomesPage = () => {
     const [incomes, setIncomes] = useState([]);
     const [incomeName, setIncomeName] = useState("");
-    const [incomeAmount, setIncomeAmount] = useState(0);
+    const [incomeAmount, setIncomeAmount] = useState();
     const [incomeDate, setIncomeDate] = useState(null);
     const [incomeCategory, setIncomeCategory] = useState("");
     const [filterType, setFilterType] = useState("all");

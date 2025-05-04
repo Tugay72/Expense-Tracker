@@ -23,7 +23,7 @@ const { Option } = Select;
 const ExpensesPage = () => {
     const [expenses, setExpenses] = useState([]);
     const [expenseName, setExpenseName] = useState("");
-    const [expenseCost, setExpenseCost] = useState(0);
+    const [expenseCost, setExpenseCost] = useState();
     const [expenseDate, setExpenseDate] = useState(null);
     const [expenseCategory, setExpenseCategory] = useState("");
     const [filterType, setFilterType] = useState("all");
@@ -192,20 +192,20 @@ const ExpensesPage = () => {
                         >
                             <div className="input-label">Gider İsmi:</div>
                             <Input
-                                placeholder="Enter expense name"
+                                placeholder="Gider ismini girin"
                                 value={expenseName}
                                 onChange={(e) => setExpenseName(e.target.value)}
                             />
                             <div className="input-label">Maliyet($):</div>
                             <InputNumber
-                                placeholder="Enter cost"
+                                placeholder="Gider miktarını girin"
                                 value={expenseCost}
                                 onChange={(value) => setExpenseCost(value)}
                                 style={{ width: "100%" }}
                             />
                             <div className="input-label">Tarih:</div>
                             <DatePicker
-                                placeholder="Select date"
+                                placeholder="Tarih seçin"
                                 value={expenseDate}
                                 onChange={(date) => setExpenseDate(date)}
                                 style={{ width: "100%" }}

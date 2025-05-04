@@ -1,3 +1,5 @@
+/* report.css */
+
 .report-page {
     min-height: 100vh;
     background-color: #f8f9fa;
@@ -31,7 +33,12 @@
 .card-content-center {
     text-align: center;
     padding: 24px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(59, 59, 59, 0.08), 0 8px 16px rgba(99, 99, 99, 0.08) !important;
+
 }
+
 
 .table-section {
     max-width: 960px;
@@ -39,11 +46,23 @@
     background-color: #fff;
     padding: 24px;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 8px rgba(59, 59, 59, 0.08);
 }
 
 .table-section h2 {
     font-size: 20px;
     margin-bottom: 16px;
     color: #222;
+}
+
+.ant-card {
+    border-radius: 8px !important;
+    background-color: white !important;
+    box-shadow: 0 4px 8px rgba(59, 59, 59, 0.08), 0 8px 16px rgba(99, 99, 99, 0.08) !important;
+}
+
+
+.ant-card-head-title {
+    font-weight: bold;
+    font-size: 16px;
 }

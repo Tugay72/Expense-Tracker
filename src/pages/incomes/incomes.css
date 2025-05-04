@@ -1,15 +1,12 @@
 .income-main {
     min-height: 100vh;
-    background-color: #ffffff;
 }
 
 .income-container {
-    max-width: 960px;
+    max-width: 720px;
+    padding: 16px;
     margin: 0 auto;
-    padding: 24px;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    
 }
 
 .add-income-card,
@@ -18,17 +15,12 @@
 .filter-card {
     margin-bottom: 24px;
     border-radius: 12px;
-    background: #ffffff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    background: #ffffff !important;
+    box-shadow: 0 4px 8px rgba(59, 59, 59, 0.08), 0 8px 16px rgba(99, 99, 99, 0.08) !important;
 }
 
-.total-income-card{
+.total-income-card {
     text-align: center;
-}
-
-.input-label {
-    font-weight: 600;
-    margin-top: 8px;
 }
 
 .ant-card-head-title {
@@ -55,20 +47,25 @@
     color: #333333;
 }
 
-/* Buttons */
+.input-label {
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+
 .ant-btn-primary {
     background-color: #1890ff;
     border-color: #1890ff;
+
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    margin-top: 32px;
+
+    width: 120px !important;
 }
 
 .ant-btn-dangerous {
     background-color: #ff4d4f;
     border-color: #ff4d4f;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .income-container {
-        padding: 12px;
-    }
 }
