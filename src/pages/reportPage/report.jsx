@@ -1,4 +1,5 @@
 import './report.css';
+import BASE_URL from "../../config";
 import {
     ConfigProvider,
     Row,
@@ -58,7 +59,7 @@ const ReportPage = () => {
             return;
         }
 
-        fetch("http://localhost:3000/api/expenses/list", {
+        fetch(`${BASE_URL}/api/expenses/list`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -78,7 +79,7 @@ const ReportPage = () => {
             })
             .catch(console.error);
 
-        fetch("http://localhost:3000/api/income/list", {
+        fetch(`${BASE_URL}/api/income/list`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -137,10 +138,17 @@ const ReportPage = () => {
                                 <Card title="Kategoriye Göre Gelirler" style={{ marginBottom: 24 }}>
                                     <Row gutter={16}>
                                         <Col span={12}>
-                                            {Object.entries(topIncomeCategory).map(([category, amount]) => (
-                                                <Statistic key={category} title={category} value={amount} precision={2} prefix="$" />
-                                            ))}
+                                            {Object.keys(topIncomeCategory).length > 0 ? (
+                                                Object.entries(topIncomeCategory).map(([category, cost]) => (
+                                                    <Statistic key={category} title={category} value={cost} precision={2} prefix="$" />
+                                                ))
+                                            ) : (
+                                                <div style={{
+                                                    color: '#0a0a0a7e'
+                                                }}>Henüz gider verisi yok.</div>
+                                            )}
                                         </Col>
+
                                         <Col span={12}>
                                             <CategoryCharts incomeCategories={topIncomeCategory} />
                                         </Col>
@@ -152,12 +160,20 @@ const ReportPage = () => {
                                 <Card title="Kategoriye Göre Giderler" style={{ marginBottom: 24 }}>
                                     <Row gutter={16}>
                                         <Col span={12}>
-                                            {Object.entries(topExpenseCategory).map(([category, cost]) => (
-                                                <Statistic key={category} title={category} value={cost} precision={2} prefix="$" />
-                                            ))}
+                                            {Object.keys(topExpenseCategory).length > 0 ? (
+                                                Object.entries(topExpenseCategory).map(([category, cost]) => (
+                                                    <Statistic key={category} title={category} value={cost} precision={2} prefix="$" />
+                                                ))
+                                            ) : (
+                                                <div style={{
+                                                    color: '#0a0a0a7e'
+                                                }}>Henüz gider verisi yok.</div>
+                                            )}
                                         </Col>
+
                                         <Col span={12}>
                                             <CategoryCharts expenseCategories={topExpenseCategory} />
+
                                         </Col>
                                     </Row>
                                 </Card>

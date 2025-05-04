@@ -1,4 +1,5 @@
 import "./login.css";
+import BASE_URL from "../../config";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -21,7 +22,7 @@ const LoginPage = () => {
 
     const onFinish = async (values) => {
         try {
-            const res = await fetch("http://localhost:3000/api/auth/login", {
+            const res = await fetch(`${BASE_URL}/api/auth/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

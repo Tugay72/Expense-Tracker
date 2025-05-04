@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import BASE_URL from "../../config";
+
 import {
     Button,
     Input,
@@ -34,7 +36,7 @@ const ExpensesPage = () => {
             return;
         }
 
-        fetch("http://localhost:3000/api/expenses/list", {
+        fetch(`${BASE_URL}/api/expenses/list`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -64,7 +66,7 @@ const ExpensesPage = () => {
             });
     }, []);
 
-    // Add Expense
+    // Gider ekle
     const handleAddExpense = () => {
         if (!expenseName || !expenseCost || !expenseDate || !expenseCategory) {
             message.error("Please fill all fields!");
@@ -84,7 +86,7 @@ const ExpensesPage = () => {
             expense_category: expenseCategory,
         };
 
-        fetch("http://localhost:3000/api/expenses/add", {
+        fetch(`${BASE_URL}/api/expenses/add`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -122,13 +124,36 @@ const ExpensesPage = () => {
             });
     };
 
-    // Remove Expense (sadece frontend'den siler)
-    const handleRemoveExpense = (index) => {
-        const updatedExpenses = [...expenses];
-        updatedExpenses.splice(index, 1);
-        setExpenses(updatedExpenses);
-        message.success("Gider silindi!");
+    // Gider Sil
+    const handleRemoveExpense = (id) => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            message.error("Token bulunamadı, lütfen giriş yapın!");
+            return;
+        }
+
+        fetch(`${BASE_URL}/api/expenses/delete/${id}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.error) {
+                    message.error("Gider silinemedi.");
+                } else {
+                    message.success("Gider başarıyla silindi!");
+                    const updatedExpenses = expenses.filter((expense) => expense.id !== id);
+                    setExpenses(updatedExpenses);
+                }
+            })
+            .catch((error) => {
+                console.error("Silme sırasında hata:", error);
+                message.error("Bir hata oluştu, lütfen tekrar deneyin.");
+            });
     };
+
 
     // Filtreleme
     const filteredExpenses = expenses.filter((item) => {
@@ -268,9 +293,7 @@ const ExpensesPage = () => {
                                         <Button
                                             danger
                                             size="small"
-                                            onClick={() =>
-                                                handleRemoveExpense(index)
-                                            }
+                                            onClick={() => handleRemoveExpense(item.id)}
                                         >
                                             Sil
                                         </Button>,

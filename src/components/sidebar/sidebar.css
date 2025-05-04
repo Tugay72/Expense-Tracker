@@ -1,38 +1,29 @@
+/* sidebar.css */
+.sidebar {
+    background-color: #1c1f22;
+    width: 250px;
+    padding-top: 10px;
+}
+
 .logo {
-    height: 64px;
-    margin: 16px;
-    font-size: 20px;
+    font-size: 24px;
     color: white;
     text-align: center;
+    margin-bottom: 30px;
     font-weight: bold;
 }
 
-.header {
-    background: #fff;
-    padding: 0 24px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-}
-
-.header-right {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.username {
-    font-weight: 500;
-}
-
 .content {
-    margin: 8px;
-    background: #fff;
-    padding: 24px;
-    min-height: 280px;
+    padding: 20px;
+    background-color: #f4f4f4;
 }
 
-.sidebar {
-    background: #001529;
+.ant-menu-dark .ant-menu-item:hover {
+    background-color: #495057 !important;
+    color: #fff !important;
+}
+
+.ant-menu-dark .ant-menu-item-selected {
+    background-color: #007bff !important;
+    color: #fff !important;
 }

@@ -1,12 +1,12 @@
 import React from "react";
 import { Layout, Menu, ConfigProvider } from "antd";
 import {
-    FileTextOutlined,
-    DollarOutlined,
     UserOutlined,
     SettingOutlined,
     HomeOutlined,
-    EuroCircleOutlined
+    PieChartOutlined,
+    CreditCardOutlined,
+    DollarOutlined
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import Theme from "../../Theme";
@@ -20,38 +20,37 @@ const SidebarLayout = ({ children }) => {
     const menuItems = [
         {
             key: "1",
-            icon: <HomeOutlined />,
+            icon: <HomeOutlined style={{ fontSize: "18px", color: "white" }} />,
             label: "Ana Sayfa",
             onClick: () => navigate("/homepage"),
         },
-
         {
             key: "2",
-            icon: <DollarOutlined />,
-            label: "Gider",
-            onClick: () => navigate("/expenses"),
-        },
-        {
-            key: "3",
-            icon: <EuroCircleOutlined />,
+            icon: <DollarOutlined style={{ fontSize: "18px", color: "#ffd700" }} />,
             label: "Gelir",
             onClick: () => navigate("/incomes"),
         },
         {
+            key: "3",
+            icon: <CreditCardOutlined style={{ fontSize: "18px", color: "#28a745" }} />,
+            label: "Gider",
+            onClick: () => navigate("/expenses"),
+        },
+        {
             key: "4",
-            icon: <FileTextOutlined />,
+            icon: <PieChartOutlined style={{ fontSize: "18px", color: "#17a2b8" }} />,
             label: "Rapor",
             onClick: () => navigate("/reports"),
         },
         {
             key: "5",
-            icon: <UserOutlined />,
+            icon: <UserOutlined style={{ fontSize: "18px", color: "#6c757d" }} />,
             label: "Profil",
             onClick: () => navigate("/profile"),
         },
         {
             key: "6",
-            icon: <SettingOutlined />,
+            icon: <SettingOutlined style={{ fontSize: "18px", color: "#dc3545" }} />,
             label: "Ayarlar",
             onClick: () => navigate("/settings"),
         },
@@ -66,10 +65,10 @@ const SidebarLayout = ({ children }) => {
                         theme="dark"
                         mode="inline"
                         items={menuItems}
+                        style={{ background: "#1c1f22" }}
                     />
                 </Sider>
                 <Layout>
-
                     <Content className="content">
                         {children}
                     </Content>

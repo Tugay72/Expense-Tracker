@@ -1,4 +1,6 @@
 import "./incomes.css";
+import BASE_URL from "../../config.js";
+
 import React, { useState, useEffect } from "react";
 import {
     Button,
@@ -35,7 +37,7 @@ const IncomesPage = () => {
             return;
         }
 
-        fetch("http://localhost:3000/api/income/list", {
+        fetch(`${BASE_URL}/api/income/list`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -85,7 +87,7 @@ const IncomesPage = () => {
             income_category: incomeCategory,
         };
 
-        fetch("http://localhost:3000/api/income/add", {
+        fetch(`${BASE_URL}/api/income/add`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -99,10 +101,16 @@ const IncomesPage = () => {
                     message.error("Gelir eklenemedi.");
                 } else {
                     message.success("Gelir başarıyla eklendi!");
-                    setIncomes((prev) => [
-                        ...prev,
-                        { ...newIncome, date: newIncome.income_date },
-                    ]);
+                    const updatedIncomes = [
+                        ...incomes,
+                        {
+                            name: newIncome.income_name,
+                            amount: newIncome.income_amount,
+                            date: newIncome.income_date,
+                            category: newIncome.income_category,
+                        },
+                    ];
+                    setIncomes(updatedIncomes);
                     setIncomeName("");
                     setIncomeAmount(0);
                     setIncomeDate(null);
@@ -115,13 +123,36 @@ const IncomesPage = () => {
             });
     };
 
-    // Gelir Silme
-    const handleRemoveIncome = (index) => {
-        const updatedIncomes = [...incomes];
-        updatedIncomes.splice(index, 1);
-        setIncomes(updatedIncomes);
-        message.success("Gelir silindi!");
+    // Güncellenmiş gelir silme fonksiyonu
+    const handleRemoveIncome = (id) => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            message.error("Token bulunamadı, lütfen giriş yapın!");
+            return;
+        }
+
+        fetch(`${BASE_URL}/api/income/delete/${id}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.error) {
+                    message.error("Gelir silinirken bir hata oluştu.");
+                } else {
+                    message.success("Gelir başarıyla silindi!");
+                    const updatedIncomes = incomes.filter((income) => income.id !== id);
+                    setIncomes(updatedIncomes);
+                }
+            })
+            .catch((error) => {
+                console.error("Gelir silinirken hata:", error);
+                message.error("Bir hata oluştu, lütfen tekrar deneyin.");
+            });
     };
+
 
     // Filtreleme
     const filteredIncomes = incomes.filter((item) => {
@@ -178,9 +209,14 @@ const IncomesPage = () => {
                                 style={{ width: "100%" }}
                             >
                                 <Option value="Maaş">Maaş</Option>
+                                <Option value="Prim">Prim</Option>
+                                <Option value="Freelance">Freelance</Option>
                                 <Option value="Yatırım">Yatırım</Option>
-                                <Option value="Yardım">Yardım</Option>
+                                <Option value="Kira">Kira</Option>
+                                <Option value="İşletme">İşletme</Option>
                                 <Option value="Satış">Satış</Option>
+                                <Option value="Hediye">Hediye</Option>
+                                <Option value="Diğer">Diğer</Option>
                                 {/* Diğer kategoriler */}
                             </Select>
                             <Button type="primary" onClick={handleAddIncome} block>
@@ -223,7 +259,7 @@ const IncomesPage = () => {
                                         <Button
                                             danger
                                             size="small"
-                                            onClick={() => handleRemoveIncome(index)}
+                                            onClick={() => handleRemoveIncome(item.id)}
                                         >
                                             Sil
                                         </Button>,
