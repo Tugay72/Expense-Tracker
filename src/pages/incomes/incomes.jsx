@@ -14,6 +14,7 @@ import {
     Card,
     Divider,
     Radio,
+    Skeleton
 } from "antd";
 import dayjs from "dayjs";
 import SidebarLayout from "../../components/sidebar/siderbar";
@@ -28,6 +29,7 @@ const IncomesPage = () => {
     const [incomeDate, setIncomeDate] = useState(null);
     const [incomeCategory, setIncomeCategory] = useState("");
     const [filterType, setFilterType] = useState("all");
+    const [loading, setLoading] = useState(true)
 
     // Verileri API'den çek
     useEffect(() => {
@@ -60,6 +62,7 @@ const IncomesPage = () => {
                     date: dayjs(item.income_date).format("YYYY-MM-DD"),
                 }));
                 setIncomes(formatted);
+                setLoading(false);
             })
             .catch((error) => {
                 console.error("Gelir verileri alınırken hata:", error);
@@ -123,7 +126,7 @@ const IncomesPage = () => {
             });
     };
 
-    // Güncellenmiş gelir silme fonksiyonu
+    // Gelir Silme
     const handleRemoveIncome = (id) => {
         const token = localStorage.getItem("token");
         if (!token) {
@@ -151,6 +154,7 @@ const IncomesPage = () => {
                 console.error("Gelir silinirken hata:", error);
                 message.error("Bir hata oluştu, lütfen tekrar deneyin.");
             });
+
     };
 
 
@@ -174,11 +178,21 @@ const IncomesPage = () => {
         0
     );
 
+    if (loading) {
+        return (
+            <div>
+                <SidebarLayout>
+                    <Skeleton />
+                </SidebarLayout>
+
+            </div>
+        )
+    };
+
     return (
         <div className="income-main">
             <SidebarLayout>
                 <div className="income-container">
-                    {/* Yeni Gelir Ekleme Formu */}
                     <Card title="Yeni Gelir Ekle" bordered={false} className="add-income-card">
                         <Space direction="vertical" size="middle" style={{ width: "100%" }}>
                             <div className="input-label">Gelir İsmi:</div>

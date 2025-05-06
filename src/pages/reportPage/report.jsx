@@ -8,7 +8,8 @@ import {
     Statistic,
     Divider,
     DatePicker,
-    List
+    List,
+    Skeleton
 } from "antd";
 import SidebarLayout from "../../components/sidebar/siderbar";
 import dayjs from "dayjs";
@@ -22,6 +23,7 @@ const ReportPage = () => {
     const [filterRange, setFilterRange] = useState([null, null]);
     const [expenses, setExpenses] = useState([]);
     const [incomes, setIncomes] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const filterByDate = (data) => {
         if (!filterRange[0] || !filterRange[1]) return data;
@@ -96,9 +98,22 @@ const ReportPage = () => {
                     date: dayjs(item.income_date).format("YYYY-MM-DD"),
                 }));
                 setIncomes(formatted);
+                setLoading(false)
             })
             .catch(console.error);
+
     }, []);
+
+    if (loading) {
+        return (
+            <div>
+                <SidebarLayout>
+                    <Skeleton />
+                </SidebarLayout>
+
+            </div>
+        )
+    };
 
     return (
         <div className="report-page">

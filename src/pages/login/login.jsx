@@ -36,13 +36,11 @@ const LoginPage = () => {
             const data = await res.json();
 
             if (res.ok) {
-                // JWT token'ı localStorage'a kaydet
+                console.log(data)
                 localStorage.setItem("token", data.token);
-
-                // Giriş başarılı → anasayfaya yönlendir
                 navigate("/homepage");
             } else {
-                error(); // Hatalı giriş
+                error();
             }
         } catch (err) {
             console.error("Login error:", err);

@@ -13,6 +13,7 @@ import {
     Card,
     Divider,
     Radio,
+    Skeleton
 } from "antd";
 import dayjs from "dayjs";
 import SidebarLayout from "../../components/sidebar/siderbar";
@@ -27,6 +28,7 @@ const ExpensesPage = () => {
     const [expenseDate, setExpenseDate] = useState(null);
     const [expenseCategory, setExpenseCategory] = useState("");
     const [filterType, setFilterType] = useState("all");
+    const [loading, setLoading] = useState(true);
 
     // Verileri API'den çek
     useEffect(() => {
@@ -59,6 +61,7 @@ const ExpensesPage = () => {
                     date: dayjs(item.expense_date).format("YYYY-MM-DD"),
                 }));
                 setExpenses(formatted);
+                setLoading(false)
             })
             .catch((error) => {
                 console.error("Gider verileri alınırken hata:", error);
@@ -175,11 +178,22 @@ const ExpensesPage = () => {
         0
     );
 
+    if (loading) {
+        return (
+            <div>
+                <SidebarLayout>
+                    <Skeleton />
+                </SidebarLayout>
+
+            </div>
+        )
+    };
+
     return (
         <div className="expenses-main">
             <SidebarLayout>
                 <div className="expenses-container">
-                    {/* Gider Ekleme Formu */}
+
                     <Card
                         title="Yeni Gider Ekle"
                         bordered={false}
