@@ -8,18 +8,19 @@ const LoginPage = lazy(() => import("./pages/login/login"));
 const Expenses = lazy(() => import("./pages/expenses/expenses"));
 const Incomes = lazy(() => import("./pages/incomes/incomes"));
 const ReportPage = lazy(() => import("./pages/reportPage/report"));
-
+const Profile = lazy(() => import('./pages/profile/profile.jsx'))
 function App() {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<LoginPage/>} />
-                <Route path="/login" element={< LoginPage/>} />
-                <Route path="/register" element={<RegisterPage/>} />
+                <Route path="/" element={<LoginPage />} />
+                <Route path="/login" element={< LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
                 <Route path="/homepage" element={<Homepage />} />
                 <Route path="/expenses" element={<Expenses />} />
                 <Route path="/incomes" element={<Incomes />} />
                 <Route path="/reports" element={<ReportPage />} />
+                <Route path="/profile" element={<Profile />} />
             </Routes>
         </Router>
     );
