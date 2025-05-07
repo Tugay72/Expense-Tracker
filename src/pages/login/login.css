@@ -15,6 +15,24 @@
     overflow: hidden;
 }
 
+.login-left,
+.login-right {
+    transition: transform 0.8s ease-in-out, opacity 0.6s ease-in-out;
+}
+
+/* Sağdan sola gelen form alanı */
+.login-slide-left {
+    transform: translateX(-100%);
+    opacity: 1;
+}
+
+/* Soldan sağa gelen görsel alanı */
+.login-slide-right {
+    transform: translateX(100%);
+    opacity: 1;
+}
+
+
 .login-left {
     flex: 1;
     display: flex;

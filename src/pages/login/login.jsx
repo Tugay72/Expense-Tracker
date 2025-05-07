@@ -2,7 +2,7 @@ import "./login.css";
 import BASE_URL from "../../config";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useEffect, useState } from "react";
 import { Form, Input, Button, Checkbox, ConfigProvider, message } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import Theme from "../../Theme";
@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 const LoginPage = () => {
     const navigate = useNavigate();
     const [messageApi, contextHolder] = message.useMessage();
+    const [animate, setAnimate] = useState(false);
 
     const error = () => {
         messageApi.open({
@@ -19,6 +20,10 @@ const LoginPage = () => {
             content: 'Invalid email or password',
         });
     };
+
+    useEffect(() => {
+        setAnimate(true);
+    }, []);
 
     const onFinish = async (values) => {
         try {
@@ -54,9 +59,9 @@ const LoginPage = () => {
             {contextHolder}
             <ConfigProvider theme={Theme}>
                 <div className="login-container">
-                    <div className="login-left"></div>
+                <div className={`login-left ${!animate ? "login-slide-right" : ""}`}></div>
 
-                    <div className="login-right">
+                <div className={`login-right ${!animate ? "login-slide-left" : ""}`}>
                         <div className="login-form-container">
                             <h2 className="login-title">Welcome!</h2>
 

@@ -5,11 +5,18 @@ import { useNavigate } from "react-router-dom";
 import { Form, Input, Button, Checkbox, ConfigProvider, message } from "antd";
 import { LockOutlined, UserOutlined, MailOutlined } from "@ant-design/icons";
 import Theme from "../../Theme";
+import { useState, useEffect } from "react";
 
 
 const RegisterPage = () => {
     const navigate = useNavigate();
     const [messageApi, contextHolder] = message.useMessage();
+
+    const [animate, setAnimate] = useState(false);
+
+    useEffect(() => {
+        setAnimate(true);
+    }, []);
 
     const onFinish = async (values) => {
         try {
@@ -47,9 +54,9 @@ const RegisterPage = () => {
             {contextHolder}
             <ConfigProvider theme={Theme}>
                 <div className="register-container">
-                    <div className="register-left"></div>
+                <div className={`register-left ${!animate ? "register-slide-right" : ""}`}></div>
 
-                    <div className="register-right">
+                <div className={`register-right ${!animate ? "register-slide-left" : ""}`}>
                         <div className="register-form-container">
                             <h2 className="register-title">Create an Account</h2>
 
